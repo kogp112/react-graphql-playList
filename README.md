@@ -5,5 +5,6 @@
 - GraphQL
 - Apollo Client
 - Tailwind CSS
+- tslint
 
 #### Base app is https://github.com/jdecastroc/typescript-react-base
