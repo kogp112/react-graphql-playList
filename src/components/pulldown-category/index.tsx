@@ -3,39 +3,31 @@ import SelectedCategory from '../selected-category'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-class PulldownCategory extends React.Component<{}, {}> {
-    constructor(props: {}) {
-        super(props);
-        this.state = {category: ''}
-        this.handleClick = this.handleClick.bind(this);
+export default function PulldownCategory() {
+    const [selectValues, setSelectValues] = React.useState<string[]>([]);
+    const handleChange = (event: React.ChangeEvent<{value: string[]}>) => {
+        event.preventDefault();
+        console.log('selectValues is',selectValues);
+        setSelectValues(event.target.value);
     }
     
-    handleClick(event: React.ChangeEvent) {
-        event.preventDefault();
-        this.setState({category: event.target.value})
-    }
-    render() {
-        return (
-            <div>
-                <Select name="category" onChange={this.handleClick} value={selectedCategories} multiple>
-                    {categories.map(category => (
-                        <MenuItem key={category} value={category} >
+    return (
+        <div>
+            <Select name="category" onChange={handleChange} value={selectValues} multiple>
+                {categories.map(category => (
+                    <MenuItem key={category} value={category} >
                         {category}
-                        </MenuItem>
-                    ))}
-                </Select>
-                <SelectedCategory category={this.state.category} />
-            </div>
-        )
-    }
+                    </MenuItem>
+                ))}
+            </Select>
+            <SelectedCategory category={selectValues} />
+        </div>
+    )
 }
-const selectedCategories = [];
 
 const categories = [
     'Rock',
     'Edm',
     'House',
     'Techno'
-  ];
-
-export default PulldownCategory;
+];
