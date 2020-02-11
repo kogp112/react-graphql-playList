@@ -1,5 +1,7 @@
 import * as React from 'react'
 import SelectedCategory from '../selected-category'
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 class PulldownCategory extends React.Component<{}, {}> {
     constructor(props: {}) {
@@ -15,15 +17,25 @@ class PulldownCategory extends React.Component<{}, {}> {
     render() {
         return (
             <div>
-            <select name="category" onChange={this.handleClick}>
-                <option value="rock">Rock</option>
-                <option value="EDM">EDM</option>
-                <option value="techno">Techno</option>
-            </select>
-            <SelectedCategory category={this.state.category} />
+                <Select name="category" onChange={this.handleClick} value={selectedCategories} multiple>
+                    {categories.map(category => (
+                        <MenuItem key={category} value={category} >
+                        {category}
+                        </MenuItem>
+                    ))}
+                </Select>
+                <SelectedCategory category={this.state.category} />
             </div>
         )
     }
 }
+const selectedCategories = [];
+
+const categories = [
+    'Rock',
+    'Edm',
+    'House',
+    'Techno'
+  ];
 
 export default PulldownCategory;
