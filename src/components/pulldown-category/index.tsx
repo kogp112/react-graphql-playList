@@ -1,17 +1,29 @@
-import * as React from 'react';
+import * as React from 'react'
+import SelectedCategory from '../selected-category'
 
-class pulldownCategory extends React.Component {
+class PulldownCategory extends React.Component<{}, {}> {
+    constructor(props: {}) {
+        super(props);
+        this.state = {category: ''}
+        this.handleClick = this.handleClick.bind(this);
+    }
+    
+    handleClick(event: React.ChangeEvent) {
+        event.preventDefault();
+        this.setState({category: event.target.value})
+    }
     render() {
         return (
-            <select name='category'>
-                <option value='rock'>Rock</option>
-                <option value='EDM'>EDM</option>
-                <option value='classic'>Classic</option>
-                <option value='house'>House</option>
-                <option value='techno'>Techno</option>
+            <div>
+            <select name="category" onChange={this.handleClick}>
+                <option value="rock">Rock</option>
+                <option value="EDM">EDM</option>
+                <option value="techno">Techno</option>
             </select>
+            <SelectedCategory category={this.state.category} />
+            </div>
         )
     }
-};
+}
 
-export default pulldownCategory;
+export default PulldownCategory;
