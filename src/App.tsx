@@ -3,7 +3,7 @@ import PullDownCategory from './components/pulldown-category'
 
 const App = () => (
   <div>
-    <h1>Hello, world.</ h1>
+    <h1>PlayList</ h1>
     <PullDownCategory />
   </div>
 )

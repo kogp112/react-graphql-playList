@@ -1,9 +1,10 @@
 import * as React from 'react'
 
-class SelectedCategory extends React.Component<{category: string[]}, {}> {
-    constructor(props: {}) {
-        super(props);
-    }
+interface Props {
+    category: string[],
+}
+
+class SelectedCategory extends React.Component<Props, {}> {
     render() {
         return (
             <span>
