@@ -30,10 +30,10 @@ export default function PulldownCategory() {
         .catch((error) =>{
           console.error(error);
         });
-    });
+    }, []);
     
     const [selectValues, setSelectValues] = React.useState<string[]>([])
-    const [categories, setCategories] = React.useState<Object>([])
+    const [categories, setCategories] = React.useState<Category[]>([])
 
     const handleChange = (event: React.ChangeEvent<{value: string[]}>) => {
         event.preventDefault()
@@ -43,7 +43,7 @@ export default function PulldownCategory() {
     return (
         <div>
             <Select name="category" onChange={handleChange} value={selectValues} multiple>
-                {Object.keys(categories).map(index => (
+                {Object.keys(categories).map((category: string, index: number) => (
                     <MenuItem key={index} value={categories[index].title} >
                         {categories[index].title}
                     </MenuItem>
@@ -52,6 +52,11 @@ export default function PulldownCategory() {
             <SelectedCategory category={selectValues} />
         </div>
     )
+}
+
+interface Category {
+    title: string,
+    subGenre: Array<any>
 }
 
 
