@@ -1,10 +1,10 @@
 import * as React from 'react'
-import PullDownCategory from './components/pulldown-category'
+import TreeViewCategory from './components/treeview-category'
 
 const App = () => (
   <div>
     <h1>PlayList</ h1>
-    <PullDownCategory />
+    <TreeViewCategory />
   </div>
 )
 

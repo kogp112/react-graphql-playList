@@ -6,10 +6,15 @@ interface Props {
 
 class SelectedCategory extends React.Component<Props, {}> {
     render() {
+        console.log('category is',this.props.category);
         return (
-            <span>
-                {this.props.category}
-            </span>
+            <>
+            {Object.keys(this.props.category).map((category: string, index: number) => (
+                <span>
+                    {category}
+                </span>
+            ))}
+            </>
         )
     }
 }
