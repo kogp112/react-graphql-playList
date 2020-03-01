@@ -10,6 +10,11 @@
   display: inline-block;
 }
 
+.PlayList{
+  width: 400px;
+  display: inline-block;
+}
+
 .h1{
   color: blue;
 }

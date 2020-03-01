@@ -25,30 +25,43 @@ const opts = (genre: string) => {
 };
 
 interface Props {
-  genres: string[],
+  lists?: string[],
+  handleClick?: Function,
 }
 
-const handleClickButton = (genre: string) => {
-  fetch(url, opts(genre))
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log('reddit songs response', responseJson);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const getLists = (genre: string, handleClick: Function) => {
+  React.useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(url, opts(genre));
+        const responseJson = await response.json();
+        handleClick(responseJson['data']['playlist']);
+      }
+      catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
 };
+
+const GenreButton: React.FunctionComponent<Props> = (props) => {
+  return (
+    <>
+      <Button color="secondary"
+        onClick={getLists(props.children, props.handleClick)}>
+        {props.children}
+      </Button>
+    </>
+  )
+}
 
 class SelectedCategory extends React.Component<Props, {}> {
   public render() {
-    console.log("category is",　this.props.genres);
-    console.log("category type is", typeof this.props.genres);
     return (
       <>
         {Object.keys(this.props.genres).map((value, index) => (
-          <Button color="secondary" onClick={handleClickButton(this.props.genres[index])}>
-            {this.props.genres[index]}
-          </Button>
+          <GenreButton handleClick={this.props.handleClick} children={this.props.genres[index]} />
         ))}
       </>
     );
