@@ -1,22 +1,22 @@
-import * as React from 'react'
+import * as React from "react";
 
 interface Props {
-    category: string[],
+  genres: string[],
 }
 
 class SelectedCategory extends React.Component<Props, {}> {
-    render() {
-        console.log('category is',this.props.category);
-        return (
-            <>
-            {Object.keys(this.props.category).map((category: string, index: number) => (
-                <span>
-                    {category}
-                </span>
-            ))}
-            </>
-        )
-    }
+  public render() {
+    console.log("category is",　this.props.genres);
+    return (
+      <>
+        {Object.keys(this.props.genres).map((value, index) => (
+          <p>
+            {this.props.genres[index]}
+          </p>
+        ))}
+      </>
+    );
+  }
 }
 
 export default SelectedCategory;

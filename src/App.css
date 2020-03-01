@@ -1,0 +1,15 @@
+
+.TreeViewCategory{
+  width: 400px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.SelectedCategory{
+  width: 400px;
+  display: inline-block;
+}
+
+.h1{
+  color: blue;
+}

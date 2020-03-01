@@ -1,11 +1,24 @@
-import * as React from 'react'
-import TreeViewCategory from './components/treeview-category'
+import * as React from "react";
+import TreeViewCategory from "./components/treeview-category";
+import SelectedCategory from "./components/selected-category";
+import "./App.css";
 
-const App = () => (
-  <div>
-    <h1>PlayList</ h1>
-    <TreeViewCategory />
-  </div>
-)
+export default function App() {
+  const [selectValues, setSelectValues] = React.useState<string[]>([]);
 
-export default App
+  const handleClick = (event: React.ChangeEvent<{ value: string[] }>) => {
+    setSelectValues([...selectValues, event]);
+  };
+
+  return (
+    <>
+      <h1 className="h1">Reddit PlayList</h1>
+      <div className="TreeViewCategory">
+        <TreeViewCategory handleClick={handleClick} />
+      </div>
+      <div className="SelectedCategory">
+        <SelectedCategory genres={selectValues} />
+      </div>
+    </>
+  );
+}
