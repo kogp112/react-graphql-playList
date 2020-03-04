@@ -13,7 +13,7 @@ const PlayListRow = (props) => {
       <ul>
         <li>{props.children["name"]}</li>
         <li>{props.children["url"]}</li>
-        <li>{props.children["imageUrl"]}</li>
+        <img src={props.children["imageUrl"]} />
       </ul>
     </>
   );
@@ -21,7 +21,7 @@ const PlayListRow = (props) => {
 
 class PlayList extends React.Component<PropsType, {}> {
   public render() {
-    if (this.props.list.length != 0) {
+    if (this.props.list.length !== 0) {
       return (
         <>
           <div>{this.props.list[0]['name'] ? this.props.list[0]['name'] : null}</div>
