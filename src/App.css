@@ -16,6 +16,11 @@
   display: inline-block;
 }
 
+.MovieArea {
+  display: inline-block;
+  vertical-align: top;
+}
+
 .h1 {
   color: blue;
 }

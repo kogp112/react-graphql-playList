@@ -22,15 +22,15 @@ const opts = {
 };
 
 interface Category {
-  title: string,
-  categories: Array<any>
+  title: string;
+  categories: Array<any>;
 }
 
 interface PropsType {
-  subgenres?: Array<string>,
-  subgenre?: string[],
-  category?: string[],
-  handleClick?: Function
+  subgenres?: Array<string>;
+  subgenre?: string[];
+  category?: string[];
+  handleClick?: Function;
 }
 
 const useStyles = makeStyles({
