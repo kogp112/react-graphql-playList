@@ -23,18 +23,30 @@ export default function App() {
     setSelectUrl(event);
   };
 
+  function CenterRow() {
+    return (
+      <React.Fragment>
+        <Grid item xs={6}>
+          <SelectedCategory genres={selectValues} handleClick={handleClickButton} />
+        </Grid>
+        <Grid item xs={6}>
+          <MovieArea url={selectUrl} />
+        </Grid>
+      </React.Fragment>
+    );
+  }
+
   return (
     <>
       <h1 className="h1">Reddit PlayList</h1>
       <Grid container spacing={1}>
-        <Grid item>
+        <Grid item xs={3}>
           <TreeViewCategory handleClick={handleClick} />
         </Grid>
-        <Grid item>
-          <SelectedCategory genres={selectValues} handleClick={handleClickButton} />
-          <MovieArea url={selectUrl} />
+        <Grid item xs={6}>
+          <CenterRow />
         </Grid>
-        <Grid item>
+        <Grid item xs={3}>
           <PlayList list={selectLists} handleClickPlayList={handleClickPlayList} />
         </Grid>
       </Grid>
