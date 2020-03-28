@@ -7,7 +7,7 @@ module.exports = {
     mode: 'development',
     context: resolve(__dirname, 'src'),
     entry: [
-        'webpack-dev-server/client?http://localhost:8080',
+        'webpack-dev-server/client?http://localhost:8081',
         'webpack/hot/only-dev-server',
         './index.tsx'
     ],
@@ -21,7 +21,7 @@ module.exports = {
         extensions: [".ts", ".tsx", ".js", ".json"]
     },
     devServer: {
-        port: '8080',
+        port: '8081',
         hot: true,
         noInfo: false,
         quiet: false,

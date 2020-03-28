@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./index.css";
 
 interface PropsType {
   list?: string[],
@@ -10,11 +11,17 @@ const PlayListRow = (props) => {
   console.log("play list row is", props);
   return (
     <>
-      <ul>
-        <li>{props.children["name"]}</li>
-        <li>{props.children["url"]}</li>
-        <img src={props.children["imageUrl"]} />
-      </ul>
+      <table>
+        <tbody>
+          <tr>
+            <td className="tdImage"><img className="musicImage" src={props.children["imageUrl"]} /></td>
+            <td>{props.children["name"]}</td>
+          </tr>
+          <tr>
+            <td>{props.children["url"]}</td>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 };

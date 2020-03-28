@@ -1,20 +1,21 @@
 
-.TreeViewCategory{
+.TreeViewCategory {
   width: 400px;
   display: inline-block;
   vertical-align: top;
 }
 
-.SelectedCategory{
+.SelectedCategory {
+  width: 400px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.PlayList {
   width: 400px;
   display: inline-block;
 }
 
-.PlayList{
-  width: 400px;
-  display: inline-block;
-}
-
-.h1{
+.h1 {
   color: blue;
 }
