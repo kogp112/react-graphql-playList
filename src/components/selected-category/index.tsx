@@ -26,8 +26,7 @@ const opts = (genre: string) => {
 
 interface Props {
   genres: string[];
-  lists?: string[];
-  handleClick?: Function;
+  handleClick: Function;
 }
 
 function getLists(genre: string, handleClick: Function) {

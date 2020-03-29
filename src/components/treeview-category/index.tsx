@@ -27,10 +27,10 @@ interface Category {
 }
 
 interface PropsType {
-  subgenres?: Array<string>;
-  subgenre?: string[];
-  category?: string[];
-  handleClick?: Function;
+  subgenres: Array<string>;
+  subgenre: string[];
+  category: string[];
+  handleClick: Function;
 }
 
 const useStyles = makeStyles({

@@ -4,13 +4,12 @@ import Grid from "@material-ui/core/Grid";
 import ButtonBase from "@material-ui/core/ButtonBase";
 
 interface PropsType {
-  list?: string[];
-  name?: string;
-  songs?: string[];
-  handleClickPlayList?: Function;
+  list: string[];
+  name: string;
+  handleClickPlayList: (arg0: any) => void;
 }
 
-const PlayListRow = (props) => {
+const PlayListRow = (props: { onClick: (arg0: any) => void; children: { [x: string]: React.ReactNode; }; }) => {
   return (
     <Grid container spacing={2}>
       <Grid item>
@@ -30,21 +29,17 @@ const PlayListRow = (props) => {
   );
 };
 
-class PlayList extends React.Component<PropsType, {}> {
-  public render() {
-    if (this.props.list.length !== 0) {
+export default function PlayList(props: PropsType) {
+    if (props.list.length !== 0) {
       return (
         <>
-          <div>{this.props.list[0]['name'] ? this.props.list[0]['name'] : null}</div>
-          {this.props.list[0]['songs'] ? Object.keys(this.props.list[0]['songs']).map((value, index) => (
-            <PlayListRow onClick={this.props.handleClickPlayList} children={this.props.list[0]["songs"][index]} />
+          <div>{props.list[0]["name"] ? props.list[0]["name"] : null}</div>
+          {props.list[0]["songs"] ? Object.keys(props.list[0]["songs"]).map((value, index) => (
+            <PlayListRow onClick={props.handleClickPlayList} children={props.list[0]["songs"][index]} />
           )) : null}
         </>
       );
     } else {
       return [];
     }
-  }
 }
-
-export default PlayList;
