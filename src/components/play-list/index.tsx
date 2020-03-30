@@ -12,17 +12,17 @@ interface PropsType {
 const PlayListRow = (props: { onClick: (arg0: any) => void; children: { [x: string]: React.ReactNode; }; }) => {
   return (
     <Grid container spacing={2}>
-      <Grid item>
+      <Grid item xs={4}>
         <ButtonBase onClick={(event) => {
-        props.onClick(props.children["url"]);
-        event.preventDefault();
-      }}>
+          props.onClick(props.children["url"]);
+          event.preventDefault();
+        }}>
           <img className="musicImage" src={props.children["imageUrl"]} />
         </ButtonBase>
       </Grid>
-      <Grid item>
+      <Grid item xs={7}>
         <ButtonBase>
-          {props.children["name"]}
+          <p className="musicName">{props.children["name"]}</p>
         </ButtonBase>
       </Grid>
     </Grid>
@@ -30,16 +30,20 @@ const PlayListRow = (props: { onClick: (arg0: any) => void; children: { [x: stri
 };
 
 export default function PlayList(props: PropsType) {
-    if (props.list.length !== 0) {
-      return (
-        <>
-          <div>{props.list[0]["name"] ? props.list[0]["name"] : null}</div>
+  if (props.list.length !== 0) {
+    return (
+      <Grid>
+        <Grid item>
+          <h3>{props.list[0]["name"] ? props.list[0]["name"] : null}</h3>
+        </Grid>
+        <Grid item>
           {props.list[0]["songs"] ? Object.keys(props.list[0]["songs"]).map((value, index) => (
             <PlayListRow onClick={props.handleClickPlayList} children={props.list[0]["songs"][index]} />
           )) : null}
-        </>
-      );
-    } else {
-      return [];
-    }
+        </Grid>
+      </Grid>
+    );
+  } else {
+    return [];
+  }
 }

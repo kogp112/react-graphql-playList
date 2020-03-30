@@ -30,7 +30,7 @@ export default function App() {
           <SelectedCategory genres={selectValues} handleClick={handleClickButton} />
         </Grid>
         <Grid item xs={6}>
-          <MovieArea url={selectUrl} />
+          <MovieArea className="MovieArea" url={selectUrl} />
         </Grid>
       </React.Fragment>
     );
@@ -39,11 +39,11 @@ export default function App() {
   return (
     <>
       <h1 className="h1">Reddit PlayList</h1>
-      <Grid container spacing={1}>
+      <Grid container alignItems="center" justify="center" spacing={2}>
         <Grid item xs={3}>
           <TreeViewCategory handleClick={handleClick} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <CenterRow />
         </Grid>
         <Grid item xs={3}>

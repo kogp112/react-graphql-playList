@@ -10,3 +10,9 @@
 .tdImage {
   width: 110;
 }
+
+.musicName {
+  word-wrap: break-word;
+  text-align: left;
+  font-size: small;
+}
