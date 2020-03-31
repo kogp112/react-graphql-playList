@@ -46,7 +46,7 @@ function getLists(genre: string, handleClick: Function) {
 
 function SelectedCategory(props: Props) {
   return (
-    <Grid alignItems="flex-start">
+    <Grid>
       {Object.keys(props.genres).map((value, index) => (
         <Button color="secondary"
           onClick={(event) => {
