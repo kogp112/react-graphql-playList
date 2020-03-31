@@ -1,5 +1,6 @@
 import * as React from "react";
 import Button from "@material-ui/core/Button";
+import { Grid } from "@material-ui/core";
 
 const json = (genre: string) => `{
     playlist(redditUrls: ["` + genre + `"]) {
@@ -26,7 +27,8 @@ const opts = (genre: string) => {
 
 interface Props {
   genres: string[];
-  handleClick: Function;
+  handleClick: () => void;
+  handleClickSecond: () => void;
 }
 
 function getLists(genre: string, handleClick: Function) {
@@ -40,11 +42,11 @@ function getLists(genre: string, handleClick: Function) {
     }
   }
   fetchData();
-};
+}
 
 function SelectedCategory(props: Props) {
   return (
-    <>
+    <Grid alignItems="flex-start">
       {Object.keys(props.genres).map((value, index) => (
         <Button color="secondary"
           onClick={(event) => {
@@ -55,7 +57,7 @@ function SelectedCategory(props: Props) {
           {props.genres[index]}
         </Button>
       ))}
-    </>
+    </Grid>
   );
 }
 

@@ -17,7 +17,7 @@ function changeUrl(url: string) {
 export default function MovieArea(props: PropsType) {
   return (
     <div className="movieArea">
-      <iframe text-align="center" width="500" height="400" src={changeUrl(props.url)} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      <iframe width="500" height="400" src={changeUrl(props.url)} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
     </div>
   );
 }
