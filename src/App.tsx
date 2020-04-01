@@ -7,24 +7,24 @@ import Grid from "@material-ui/core/Grid";
 import "./App.css";
 
 export default function App() {
-  const [selectValues, setSelectValues] = React.useState<[]>([]);
-  const [selectLists, setSelectLists] = React.useState<string[]>([]);
-  const [selectUrl, setSelectUrl] = React.useState<string>();
+  const [selectValues, setSelectValues] = React.useState<string[]>([]);
+  const [playLists, setPlayLists] = React.useState<string[]>([]);
+  const [musicUrl, setMusicUrl] = React.useState<string>();
 
-  const onClickTreeView = (event: React.ChangeEvent<{ value: string[] }>) => {
-    setSelectValues([...selectValues, event]);
+  const onClickTreeView = (event: string) => {
+    setSelectValues( [...selectValues, event] );
   };
 
-  const onClickSelectedCategory = (event: React.ChangeEvent<{ value: string[] }>) => {
-    setSelectLists(event);
+  const onClickSelectedCategory = (event: string[]) => {
+    setPlayLists(event);
   };
 
-  const onClickSelectedCategorySecond = (event: React.ChangeEvent<{ value: string[] }>) => {
+  const onClickSelectedCategorySecond = (event: any) => {
     setSelectValues(event);
   };
 
-  const onClickPlayList = (event: React.ChangeEvent<{ value: string }>) => {
-    setSelectUrl(event);
+  const onClickPlayList = (event: string) => {
+    setMusicUrl(event);
   };
 
   function CenterRow() {
@@ -40,7 +40,7 @@ export default function App() {
         <Grid item>
           <MovieArea
             className="MovieArea"
-            url={selectUrl}
+            url={musicUrl}
           />
         </Grid>
       </React.Fragment>
@@ -58,7 +58,7 @@ export default function App() {
           <CenterRow />
         </Grid>
         <Grid item xs={3}>
-          <PlayList list={selectLists} handleClickPlayList={onClickPlayList} />
+          <PlayList list={playLists} handleClickPlayList={onClickPlayList} />
         </Grid>
       </Grid>
     </>
