@@ -8,8 +8,8 @@ import "./App.css";
 
 export default function App() {
   const [selectValues, setSelectValues] = React.useState<string[]>([]);
-  const [playLists, setPlayLists] = React.useState<string[]>([]);
-  const [musicUrl, setMusicUrl] = React.useState<string>();
+  const [playLists, setPlayLists] = React.useState<string[]>([""]);
+  const [musicUrl, setMusicUrl] = React.useState<string>("");
 
   const onClickTreeView = (event: string) => {
     setSelectValues( [...selectValues, event] );
@@ -17,10 +17,6 @@ export default function App() {
 
   const onClickSelectedCategory = (event: string[]) => {
     setPlayLists(event);
-  };
-
-  const onClickSelectedCategorySecond = (event: any) => {
-    setSelectValues(event);
   };
 
   const onClickPlayList = (event: string) => {
@@ -34,12 +30,10 @@ export default function App() {
           <SelectedCategory
             genres={selectValues}
             handleClick={onClickSelectedCategory}
-            handleClickSecond={onClickSelectedCategorySecond}
           />
         </Grid>
         <Grid item>
           <MovieArea
-            className="MovieArea"
             url={musicUrl}
           />
         </Grid>
