@@ -1,6 +1,7 @@
 import * as React from "react";
 import Button from "@material-ui/core/Button";
-import { Grid } from "@material-ui/core";
+import { Grid, createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { lightBlue, pink } from "@material-ui/core/colors";
 
 const json = (genre: string) => `{
     playlist(redditUrls: ["` + genre + `"]) {
@@ -27,8 +28,7 @@ const opts = (genre: string) => {
 
 interface Props {
   genres: string[];
-  handleClick: () => void;
-  handleClickSecond: () => void;
+  handleClick: (event: string[]) => void;
 }
 
 function getLists(genre: string, handleClick: Function) {
@@ -45,18 +45,35 @@ function getLists(genre: string, handleClick: Function) {
 }
 
 function SelectedCategory(props: Props) {
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: lightBlue[500],
+      },
+      secondary: {
+        main: pink[500],
+      },
+    },
+  });
+  const [buttonColor, setButtonColor] = React.useState("primary");
+  const onClickButton = () => {
+    setButtonColor("secondary");
+  };
   return (
     <Grid>
-      {Object.keys(props.genres).map((value, index) => (
-        <Button color="secondary"
-          onClick={(event) => {
-            getLists(props.genres[index], props.handleClick);
-            event.preventDefault();
-          }}
-        >
-          {props.genres[index]}
-        </Button>
-      ))}
+      <ThemeProvider theme={theme}>
+        {Object.keys(props.genres).map((value, index) => (
+          <Button color={buttonColor}
+            onClick={(event) => {
+              getLists(props.genres[index], props.handleClick);
+              onClickButton();
+              event.preventDefault();
+            }}
+          >
+            {props.genres[index]}
+          </Button>
+        ))}
+      </ThemeProvider>
     </Grid>
   );
 }
