@@ -55,18 +55,21 @@ function SelectedCategory(props: Props) {
       },
     },
   });
-  const [buttonColor, setButtonColor] = React.useState("primary");
-  const onClickButton = () => {
-    setButtonColor("secondary");
+
+  const [buttonText, setButtonText] = React.useState("");
+
+  const onClickButton = (value: string) => {
+    setButtonText(value);
   };
+
   return (
     <Grid>
       <ThemeProvider theme={theme}>
         {Object.keys(props.genres).map((value, index) => (
-          <Button color={buttonColor}
+          <Button variant="contained" color={buttonText === props.genres[index] ? "secondary":"primary"}
             onClick={(event) => {
               getLists(props.genres[index], props.handleClick);
-              onClickButton();
+              onClickButton(props.genres[index]);
               event.preventDefault();
             }}
           >
