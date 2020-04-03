@@ -21,16 +21,14 @@ const opts = {
   body: JSON.stringify({ query }),
 };
 
-interface Category {
-  title: string;
-  categories: Array<any>;
-}
-
 interface PropsType {
-  subgenres: Array<string>;
-  subgenre: string[];
-  category: string[];
-  handleClick: Function;
+  subgenre?: {
+    title: string;
+    subGenreUrlList: string[];
+  } | null;
+  subgenres: string[];
+  category?: string[];
+  handleClick: (event: string) => void;
 }
 
 const useStyles = makeStyles({
@@ -46,6 +44,7 @@ const GenreTreeView: React.FunctionComponent<PropsType> = (props) => {
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
+      multiSelect
     >
       <SubGenreTreeItem subgenre={props.subgenres} handleClick={props.handleClick} />
     </TreeView>
@@ -63,6 +62,7 @@ const SubGenreTreeItem: React.FunctionComponent<PropsType> = (props) => {
       {splitGenreName(item)}
     </span>
   );
+
   if (props.subgenre) {
     return (
       <>
@@ -99,12 +99,12 @@ export default function TreeViewCategory(props: PropsType) {
       });
   }, []);
 
-  const [categories, setCategories] = React.useState<Category[]>([]);
+  const [categories, setCategories] = React.useState<string[][]>([]);
 
   return (
     <>
       {Object.keys(categories).map((category: string, index: number) => (
-        <GenreTreeView float="left" key={String(index)} subgenres={categories[index]} handleClick={props.handleClick} />
+        <GenreTreeView subgenres={categories[index]} handleClick={props.handleClick} />
       ))}
     </>
   );
