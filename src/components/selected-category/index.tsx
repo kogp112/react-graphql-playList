@@ -1,6 +1,6 @@
 import * as React from "react";
 import Button from "@material-ui/core/Button";
-import { Grid, createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { Grid, createMuiTheme, ThemeProvider, makeStyles, createStyles, Theme } from "@material-ui/core";
 import { lightBlue, pink } from "@material-ui/core/colors";
 
 const json = (genre: string) => `{
@@ -31,6 +31,10 @@ interface Props {
   handleClick: (event: string[]) => void;
 }
 
+interface PropsType {
+  text?: string;
+}
+
 function getLists(genre: string, handleClick: Function) {
   async function fetchData() {
     try {
@@ -44,40 +48,71 @@ function getLists(genre: string, handleClick: Function) {
   fetchData();
 }
 
-function SelectedCategory(props: Props) {
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: lightBlue[500],
-      },
-      secondary: {
-        main: pink[500],
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: "flex",
+      justifyContent: "flex-start",
+      flexWrap: "wrap",
+      '& > *': {
+        margin: theme.spacing(0.5),
       },
     },
-  });
+  }),
+);
 
+const theme = createMuiTheme({
+  spacing: 2,
+  palette: {
+    primary: {
+      main: lightBlue[500],
+    },
+    secondary: {
+      main: pink[500],
+    },
+  },
+});
+
+function SelectedCategory(props: Props) {
+  const classes = useStyles();
   const [buttonText, setButtonText] = React.useState("");
 
   const onClickButton = (value: string) => {
     setButtonText(value);
   };
 
+  const ShowButton: React.FunctionComponent<PropsType> = (prop) => {
+    if (prop.text === buttonText) {
+      return (
+        <Button variant="contained" color="secondary"
+          onClick = {(event) => {
+            getLists(prop.text, props.handleClick);
+            onClickButton(prop.text);
+            event.preventDefault();
+          }}
+        >{prop.text}</Button>
+        )
+    } else {
+      return (
+        <Button variant="contained" color="primary"
+          onClick={(event) => {
+            getLists(prop.text, props.handleClick);
+            onClickButton(prop.text);
+            event.preventDefault();
+          }}
+        >{prop.text}</Button>
+      )
+    }
+  };
+
   return (
-    <Grid>
+    <Grid className={classes.root}>
       <ThemeProvider theme={theme}>
         {Object.keys(props.genres).map((value, index) => (
-          <Button variant="contained" color={buttonText === props.genres[index] ? "secondary":"primary"}
-            onClick={(event) => {
-              getLists(props.genres[index], props.handleClick);
-              onClickButton(props.genres[index]);
-              event.preventDefault();
-            }}
-          >
-            {props.genres[index]}
-          </Button>
+          <ShowButton text={props.genres[index]} />
         ))}
       </ThemeProvider>
-    </Grid>
+    </Grid >
   );
 }
 

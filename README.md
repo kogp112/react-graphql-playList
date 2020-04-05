@@ -1,10 +1,8 @@
-### This is music player SPA made by React & GraphQL & TypeScript
+### This is music player SPA site
 ## Tools
 - React
 - TypeScript
 - GraphQL
-- Apollo Client
-- Tailwind CSS
-- tslint
+- material ui
 
 #### Base app is https://github.com/jdecastroc/typescript-react-base
