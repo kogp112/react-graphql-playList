@@ -1,7 +1,13 @@
 import * as React from "react";
-import "./index.css";
+import { Theme, createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
-import ButtonBase from "@material-ui/core/ButtonBase";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import CardHeader from "@material-ui/core/CardHeader";
 
 interface PropsType {
   list: string[];
@@ -9,40 +15,80 @@ interface PropsType {
   handleClickPlayList: (event: string) => void;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: "flex",
+      margin: 15,
+    },
+    content: {
+      flex: "1 0 auto",
+      width: 200,
+    },
+    cover: {
+      width: 151,
+    },
+    playIcon: {
+      height: 38,
+      width: 38,
+    },
+  }),
+);
+
 const PlayListRow = (props: { onClick: (arg0: any) => void; children: { [x: string]: React.ReactNode; }; }) => {
+  const classes = useStyles();
+
   return (
     <React.Fragment>
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <ButtonBase onClick={(event) => {
-            props.onClick(props.children["url"]);
-            event.preventDefault();
-          }}>
-            <img className="musicImage" src={props.children["imageUrl"]} />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={7}>
-          <ButtonBase>
-            <p className="musicName">{props.children["name"]}</p>
-          </ButtonBase>
-        </Grid>
-      </Grid>
-    </React.Fragment>
+      <Card className={classes.root}>
+        <CardHeader
+          action={
+            <IconButton
+              aria-label="play/pause"
+              onClick={(event) => {
+                props.onClick(props.children["url"]);
+                event.preventDefault();
+              }}
+            >
+              <PlayArrowIcon className={classes.playIcon} />
+            </IconButton>
+          }
+        />
+        <CardContent className={classes.content}>
+          <Typography variant="subtitle2" noWrap={false}>
+            {props.children["name"]}
+          </Typography>
+        </CardContent>
+        <CardMedia
+          className={classes.cover}
+          image={props.children["imageUrl"]}
+          title={props.children["name"]}
+        />
+      </Card>
+    </React.Fragment >
   );
 };
 
 export default function PlayList(props: PropsType) {
-  if (props.list.length !== 0) {
+  console.log("props is", typeof props.list[0]["songs"]);
+  console.log("props is", props.list[0]["songs"]);
+  if (props.list[0]["songs"] !== undefined) {
+    const songs = props.list[0]["songs"];
     return (
       <React.Fragment>
         <Grid>
           <Grid item>
-            <h3>{props.list[0]["name"] ? props.list[0]["name"] : null}</h3>
+            <Typography variant="h5">
+              {props.list[0]["name"] ? props.list[0]["name"] : null}
+            </Typography>
           </Grid>
           <Grid item>
-            {props.list[0]["songs"] ? Object.keys(props.list[0]["songs"]).map((value, index) => (
-              <PlayListRow onClick={props.handleClickPlayList} children={props.list[0]["songs"][index]} />
-            )) : null}
+            {songs === [] ?
+              <Typography variant="h5">nothing</Typography> : 
+              Object.keys(songs).map((value, index) => (
+                <PlayListRow onClick={props.handleClickPlayList} children={songs[index]} />
+              ))
+            }
           </Grid>
         </Grid>
       </React.Fragment>
@@ -50,7 +96,7 @@ export default function PlayList(props: PropsType) {
   } else {
     return (
       <React.Fragment>
-        <div>nothing</div>
+        <div>error</div>
       </React.Fragment>
     );
   }
