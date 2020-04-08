@@ -1,7 +1,5 @@
 import * as React from "react";
-import Button from "@material-ui/core/Button";
-import { Grid, createMuiTheme, ThemeProvider, makeStyles, createStyles, Theme } from "@material-ui/core";
-import { lightBlue, pink } from "@material-ui/core/colors";
+import { Grid, makeStyles, createStyles, Theme } from "@material-ui/core";
 
 const json = (genre: string) => `{
     playlist(redditUrls: ["` + genre + `"]) {
@@ -32,7 +30,8 @@ interface Props {
 }
 
 interface PropsType {
-  text?: string;
+  text: string;
+  handleClick: (event: string[]) => void;
 }
 
 function getLists(genre: string, handleClick: Function) {
@@ -51,67 +50,49 @@ function getLists(genre: string, handleClick: Function) {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex",
-      justifyContent: "flex-start",
-      flexWrap: "wrap",
-      '& > *': {
+      "display": "flex",
+      "justifyContent": "flex-start",
+      "flexWrap": "wrap",
+      "& > *": {
         margin: theme.spacing(0.5),
       },
     },
   }),
 );
 
-const theme = createMuiTheme({
-  spacing: 2,
-  palette: {
-    primary: {
-      main: lightBlue[500],
-    },
-    secondary: {
-      main: pink[500],
-    },
-  },
-});
+const ShowButton: React.FunctionComponent<PropsType> = (props: PropsType) => {
+  const [buttonText, setButtonText] = React.useState("");
+
+  if (buttonText === props.text) {
+    return (
+      <button style={{ backgroundColor: "pink", color: "black" }}
+        onClick={(event) => {
+          getLists(props.text, props.handleClick);
+          setButtonText(props.text);
+          event.preventDefault();
+        }}
+      >{props.text}</button>
+    );
+  } else {
+    return (
+      <button style={{ backgroundColor: "blue", color: "white" }}
+        onClick={(event) => {
+          getLists(props.text, props.handleClick);
+          setButtonText(props.text);
+          event.preventDefault();
+        }}
+      >{props.text}</button>
+    );
+  }
+};
 
 function SelectedCategory(props: Props) {
   const classes = useStyles();
-  const [buttonText, setButtonText] = React.useState("");
-
-  const onClickButton = (value: string) => {
-    setButtonText(value);
-  };
-
-  const ShowButton: React.FunctionComponent<PropsType> = (prop) => {
-    if (prop.text === buttonText) {
-      return (
-        <Button variant="contained" color="secondary"
-          onClick = {(event) => {
-            getLists(prop.text, props.handleClick);
-            onClickButton(prop.text);
-            event.preventDefault();
-          }}
-        >{prop.text}</Button>
-        )
-    } else {
-      return (
-        <Button variant="contained" color="primary"
-          onClick={(event) => {
-            getLists(prop.text, props.handleClick);
-            onClickButton(prop.text);
-            event.preventDefault();
-          }}
-        >{prop.text}</Button>
-      )
-    }
-  };
-
   return (
     <Grid className={classes.root}>
-      <ThemeProvider theme={theme}>
-        {Object.keys(props.genres).map((value, index) => (
-          <ShowButton text={props.genres[index]} />
-        ))}
-      </ThemeProvider>
+      {Object.keys(props.genres).map((value, index) => (
+        <ShowButton text={props.genres[index]} handleClick={props.handleClick} />
+      ))}
     </Grid >
   );
 }
