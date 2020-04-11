@@ -26,7 +26,10 @@ interface PropsType {
     title: string;
     subGenreUrlList: string[];
   } | null;
-  subgenres: string[];
+  subgenres?: {
+    title: string;
+    subGenreUrlList: string[];
+  } | null;
   category?: string[];
   handleClick: (event: string) => void;
 }
