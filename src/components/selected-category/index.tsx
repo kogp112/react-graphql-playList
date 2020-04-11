@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Grid, makeStyles, createStyles, Theme } from "@material-ui/core";
+import { Grid, makeStyles, createStyles, Theme, Button } from "@material-ui/core";
 
 const json = (genre: string) => `{
     playlist(redditUrls: ["` + genre + `"]) {
@@ -34,12 +34,12 @@ interface PropsType {
   handleClick: (event: string[]) => void;
 }
 
-function getLists(genre: string, handleClick: Function) {
+function getMusicLists(genre: string, handleClick: (e: []) => void) {
   async function fetchData() {
     try {
       const response = await fetch(url, opts(genre));
       const responseJson = await response.json();
-      handleClick(responseJson['data']['playlist']);
+      handleClick(responseJson["data"]["playlist"]);
     } catch (error) {
       console.error(error);
     }
@@ -65,23 +65,23 @@ const ShowButton: React.FunctionComponent<PropsType> = (props: PropsType) => {
 
   if (buttonText === props.text) {
     return (
-      <button style={{ backgroundColor: "pink", color: "black" }}
+      <Button style={{ backgroundColor: "pink", color: "black" }}
         onClick={(event) => {
-          getLists(props.text, props.handleClick);
+          getMusicLists(props.text, props.handleClick);
           setButtonText(props.text);
           event.preventDefault();
         }}
-      >{props.text}</button>
+      >{props.text}</Button>
     );
   } else {
     return (
-      <button style={{ backgroundColor: "blue", color: "white" }}
+      <Button style={{ backgroundColor: "blue", color: "white" }}
         onClick={(event) => {
-          getLists(props.text, props.handleClick);
+          getMusicLists(props.text, props.handleClick);
           setButtonText(props.text);
           event.preventDefault();
         }}
-      >{props.text}</button>
+      >{props.text}</Button>
     );
   }
 };

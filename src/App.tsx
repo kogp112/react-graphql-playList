@@ -51,7 +51,7 @@ export default function App() {
         <Grid item xs={5}>
           <CenterRow />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <PlayList list={playLists} handleClickPlayList={onClickPlayList} />
         </Grid>
       </Grid>

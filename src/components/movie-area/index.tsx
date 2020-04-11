@@ -8,7 +8,6 @@ interface PropsType {
 function changeUrl(url: string) {
   if (url !== undefined) {
     const splitName = url.replace("watch?v=", "embed/");
-    console.log(splitName);
     return splitName;
   }
   return;
@@ -16,8 +15,12 @@ function changeUrl(url: string) {
 
 export default function MovieArea(props: PropsType) {
   return (
-    <div className="movieArea">
-      <iframe width="500" height="400" src={changeUrl(props.url)} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-    </div>
+    <>
+      {props.url === "" ?
+        <div width="500" height="400">Let's Play</div>
+        :
+        <iframe width="500" height="400" src={changeUrl(props.url)} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        }
+    </>
   );
 }
