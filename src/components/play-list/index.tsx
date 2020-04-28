@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Theme, createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -86,7 +86,7 @@ export default function PlayList(props: PropsType) {
             {songs === [] ?
               <Typography variant="h5">nothing</Typography> : 
               Object.keys(songs).map((value, index) => (
-                <PlayListRow onClick={props.handleClickPlayList} children={songs[index]} />
+                <PlayListRow key={value} onClick={props.handleClickPlayList} children={songs[index]} />
               ))
             }
           </Grid>

@@ -4,93 +4,30 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { makeStyles } from "@material-ui/core/styles";
 
-const query = `
-  query {
-    reddits {
-      title
-      subGenreUrlList
+export default function TreeViewCategory(props: Props) {
+  const query = `
+    query {
+      reddits {
+        title
+        subGenreUrlList
+      }
     }
-  }
-`;
+  `;
 
-const url = "https://reddit-music-graphql.herokuapp.com/";
+  const url = "https://reddit-music-graphql.herokuapp.com/";
 
-const opts = {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ query }),
-};
+  const opts = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query }),
+  };
 
-interface PropsType {
-  subgenre?: {
-    title: string;
-    subGenreUrlList: string[];
-  } | null;
-  subgenres?: {
-    title: string;
-    subGenreUrlList: string[];
-  } | null;
-  category?: string[];
-  handleClick: (event: string) => void;
-}
+  const useStyles = makeStyles({
+    root: {
+      maxWidth: 400,
+    },
+  });
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 400,
-  },
-});
-
-const GenreTreeView: React.FunctionComponent<PropsType> = (props) => {
-  const classes = useStyles();
-  return (
-    <TreeView
-      className={classes.root}
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
-      multiSelect
-    >
-      <SubGenreTreeItem subgenre={props.subgenres} handleClick={props.handleClick} />
-    </TreeView>
-  );
-};
-
-const SubGenreTreeItem: React.FunctionComponent<PropsType> = (props) => {
-  const renderLabel = (item: string) => (
-    <span
-      onClick={(event) => {
-        props.handleClick(splitGenreName(item));
-        event.preventDefault();
-      }}
-    >
-      {splitGenreName(item)}
-    </span>
-  );
-
-  if (props.subgenre) {
-    return (
-      <>
-        <TreeItem nodeId={"1"} label={props.subgenre.title}>
-          {Object.keys(props.subgenre.subGenreUrlList).map((category: string, index: number) => (
-            <TreeItem
-              key={String(index)}
-              nodeId={String(index)}
-              label={renderLabel(props.subgenre.subGenreUrlList[index])}
-            />
-          ))}
-        </TreeItem>
-      </>
-    );
-  } else {
-    return null;
-  }
-};
-
-function splitGenreName(name: string) {
-  const splitName = name.split("\/r\/");
-  return splitName[1];
-}
-
-export default function TreeViewCategory(props: PropsType) {
   React.useEffect(() => {
     fetch(url, opts)
       .then((response) => response.json())
@@ -104,11 +41,65 @@ export default function TreeViewCategory(props: PropsType) {
 
   const [categories, setCategories] = React.useState<string[][]>([]);
 
+  const classes = useStyles();
   return (
     <>
-      {Object.keys(categories).map((category: string, index: number) => (
-        <GenreTreeView subgenres={categories[index]} handleClick={props.handleClick} />
+      {Object.keys(categories).map((key: string, index: number) => (
+        <TreeView
+          className={classes.root}
+          defaultCollapseIcon={<ExpandMoreIcon />}
+          defaultExpandIcon={<ChevronRightIcon />}
+          multiSelect
+          key={key}
+        >
+          <TreeItemCategory subgenre={categories[index]} onClickTreeItem={props.handleClick} />
+        </TreeView>
       ))}
     </>
   );
+}
+
+const TreeItemCategory: React.FunctionComponent<TreeItemProps> = (props) => {
+  const { title, subGenreUrlList } = props.subgenre;
+  const renderLabel = (item: string) => (
+    <span
+      onClick={(event) => {
+        props.onClickTreeItem(splitGenreName(item));
+        event.preventDefault();
+      }}
+    >
+      {splitGenreName(item)}
+    </span>
+  );
+
+  return (
+    <>
+      <TreeItem nodeId={"1"} label={title}>
+        {Object.keys(subGenreUrlList).map((key: string, index: number) => (
+          <TreeItem
+            key={key}
+            nodeId={key}
+            label={renderLabel(subGenreUrlList[index])}
+          />
+        ))}
+      </TreeItem>
+    </>
+  );
+};
+
+function splitGenreName(name: string) {
+  const splitName = name.split("\/r\/");
+  return splitName[1];
+}
+
+interface Props {
+  handleClick: (event: string) => void;
+}
+
+interface TreeItemProps {
+  subgenre: {
+    title: string;
+    subGenreUrlList: string[];
+  };
+  onClickTreeItem: (event: string) => void;
 }

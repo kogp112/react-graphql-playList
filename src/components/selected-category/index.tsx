@@ -1,5 +1,8 @@
 import * as React from "react";
-import { Grid, makeStyles, createStyles, Theme, Button } from "@material-ui/core";
+import { createStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 
 const json = (genre: string) => `{
     playlist(redditUrls: ["` + genre + `"]) {
@@ -91,7 +94,7 @@ function SelectedCategory(props: Props) {
   return (
     <Grid className={classes.root}>
       {Object.keys(props.genres).map((value, index) => (
-        <ShowButton text={props.genres[index]} handleClick={props.handleClick} />
+        <ShowButton key={value} text={props.genres[index]} handleClick={props.handleClick} />
       ))}
     </Grid >
   );

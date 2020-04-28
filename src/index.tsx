@@ -9,7 +9,7 @@ declare let module: { hot: any };
 
 if (module.hot) {
   module.hot.accept("./App", () => {
-    const App = require("./App").default;
-    render(<App />, document.getElementById("root"));
+    const Home = require("./App").default;
+    render(<Home />, document.getElementById("root"));
   });
 }
