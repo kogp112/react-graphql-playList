@@ -1,8 +1,13 @@
 import * as React from "react";
-import "./index.css";
+import Box from "@material-ui/core/Box";
 
-interface PropsType {
-  url: string;
+export default function MovieArea(props: PropsType) {
+  return (
+    <Box width="100%" height="100%">
+      <iframe width="565px" height="400px" src={changeUrl(props.url)} allow="accelerometer; autoplay; encrypted-media; picture-in-picture">
+      </iframe>
+    </Box>
+  );
 }
 
 function changeUrl(url: string) {
@@ -13,14 +18,6 @@ function changeUrl(url: string) {
   return;
 }
 
-export default function MovieArea(props: PropsType) {
-  return (
-    <>
-      {props.url === "" ?
-        <div width="500" height="400">Let's Play</div>
-        :
-        <iframe width="500" height="400" src={changeUrl(props.url)} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-        }
-    </>
-  );
+interface PropsType {
+  url: string;
 }
