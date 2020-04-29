@@ -4,73 +4,36 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
-const json = (genre: string) => `{
-    playlist(redditUrls: ["` + genre + `"]) {
-      name
-      songs {
-        name
-        url
-        imageUrl
-      }
-    }
-  }
-`;
-
-const url = "https://reddit-music-graphql.herokuapp.com/";
-
-const opts = (genre: string) => {
-  const query = json(genre);
-  return {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query }),
-  };
-};
-
-interface Props {
-  genres: string[];
-  handleClick: (event: string[]) => void;
-}
-
-interface PropsType {
-  text: string;
-  handleClick: (event: string[]) => void;
-}
-
-function getMusicLists(genre: string, handleClick: (e: []) => void) {
-  async function fetchData() {
-    try {
-      const response = await fetch(url, opts(genre));
-      const responseJson = await response.json();
-      handleClick(responseJson["data"]["playlist"]);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  fetchData();
-}
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      "display": "flex",
-      "justifyContent": "flex-start",
-      "flexWrap": "wrap",
-      "& > *": {
-        margin: theme.spacing(0.5),
+export default function SelectedCategory(props: Props) {
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      root: {
+        "display": "flex",
+        "justifyContent": "flex-start",
+        "flexWrap": "wrap",
+        "& > *": {
+          margin: theme.spacing(0.5),
+        },
       },
-    },
-  }),
-);
+    }),
+  );
+  const classes = useStyles();
+  return (
+    <Grid className={classes.root}>
+      {Object.keys(props.genres).map((value, index) => (
+        <CategoryButton key={value} text={props.genres[index]} onClickCategoryButton={props.handleClick} />
+      ))}
+    </Grid >
+  );
+}
 
-const ShowButton: React.FunctionComponent<PropsType> = (props: PropsType) => {
+const CategoryButton: React.FunctionComponent<CategoryButtonProps> = (props: CategoryButtonProps) => {
   const [buttonText, setButtonText] = React.useState("");
-
   if (buttonText === props.text) {
     return (
       <Button style={{ backgroundColor: "pink", color: "black" }}
         onClick={(event) => {
-          getMusicLists(props.text, props.handleClick);
+          getMusicLists(props.text, props.onClickCategoryButton);
           setButtonText(props.text);
           event.preventDefault();
         }}
@@ -80,7 +43,7 @@ const ShowButton: React.FunctionComponent<PropsType> = (props: PropsType) => {
     return (
       <Button style={{ backgroundColor: "blue", color: "white" }}
         onClick={(event) => {
-          getMusicLists(props.text, props.handleClick);
+          getMusicLists(props.text, props.onClickCategoryButton);
           setButtonText(props.text);
           event.preventDefault();
         }}
@@ -89,15 +52,58 @@ const ShowButton: React.FunctionComponent<PropsType> = (props: PropsType) => {
   }
 };
 
-function SelectedCategory(props: Props) {
-  const classes = useStyles();
-  return (
-    <Grid className={classes.root}>
-      {Object.keys(props.genres).map((value, index) => (
-        <ShowButton key={value} text={props.genres[index]} handleClick={props.handleClick} />
-      ))}
-    </Grid >
-  );
+function getMusicLists(genre: string, onClick: (e: MusicList) => void) {
+  const json = (param: string) => `{
+      playlist(redditUrls: ["` + param + `"]) {
+        name
+        songs {
+          name
+          url
+          imageUrl
+        }
+      }
+    }
+  `;
+  const url = "https://reddit-music-graphql.herokuapp.com/";
+  const opts = (param: string) => {
+    const query = json(param);
+    return {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query }),
+    };
+  };
+
+  async function fetchData() {
+    try {
+      const response = await fetch(url, opts(genre));
+      const responseJson = await response.json();
+      const eventData = responseJson.data.playlist;
+      onClick(eventData[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  fetchData();
 }
 
-export default SelectedCategory;
+interface Props {
+  genres: string[];
+  handleClick: (event: MusicList) => void;
+}
+
+interface CategoryButtonProps {
+  text: string;
+  onClickCategoryButton: (event: MusicList) => void;
+}
+
+interface MusicList {
+  name: string;
+  songs: Songs[];
+}
+
+interface Songs {
+  name: string;
+  url: string;
+  imageUrl: string;
+}

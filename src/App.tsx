@@ -4,18 +4,27 @@ import SelectedCategory from "./components/selected-category";
 import PlayList from "./components/play-list";
 import MovieArea from "./components/movie-area";
 import Grid from "@material-ui/core/Grid";
-//import "./App.css";
 import { Typography } from "@material-ui/core";
 
 export default function App() {
+  const initSongs = {
+    name: "",
+    songs: [
+      {
+        name: "",
+        url: "",
+        imageUrl: "",
+      },
+    ],
+  };
   const [selectValues, setSelectValues] = React.useState<string[]>([]);
-  const [playLists, setPlayLists] = React.useState<string[]>([""]);
+  const [playLists, setPlayLists] = React.useState<PlayList>(initSongs);
   const [musicUrl, setMusicUrl] = React.useState<string>("");
 
   const onClickTreeView = (event: string) => {
     setSelectValues([...selectValues, event]);
   };
-  const onClickSelectedCategory = (event: string[]) => {
+  const onClickSelectedCategory = (event: PlayList) => {
     setPlayLists(event);
   };
   const onClickPlayList = (event: string) => {
@@ -46,4 +55,15 @@ export default function App() {
       </Grid>
     </>
   );
+}
+
+interface PlayList {
+  name: string;
+  songs: Songs[];
+}
+
+interface Songs {
+  name: string;
+  url: string;
+  imageUrl: string;
 }

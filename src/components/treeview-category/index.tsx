@@ -39,7 +39,7 @@ export default function TreeViewCategory(props: Props) {
       });
   }, []);
 
-  const [categories, setCategories] = React.useState<string[][]>([]);
+  const [categories, setCategories] = React.useState<Categories[] | []>([]);
 
   const classes = useStyles();
   return (
@@ -60,7 +60,8 @@ export default function TreeViewCategory(props: Props) {
 }
 
 const TreeItemCategory: React.FunctionComponent<TreeItemProps> = (props) => {
-  const { title, subGenreUrlList } = props.subgenre;
+  const title = props.subgenre.title;
+  const subGenreUrlList = props.subgenre.subGenreUrlList;
   const renderLabel = (item: string) => (
     <span
       onClick={(event) => {
@@ -74,7 +75,7 @@ const TreeItemCategory: React.FunctionComponent<TreeItemProps> = (props) => {
 
   return (
     <>
-      <TreeItem nodeId={"1"} label={title}>
+      <TreeItem nodeId={title} label={title}>
         {Object.keys(subGenreUrlList).map((key: string, index: number) => (
           <TreeItem
             key={key}
@@ -92,14 +93,16 @@ function splitGenreName(name: string) {
   return splitName[1];
 }
 
+interface Categories {
+  title: string;
+  subGenreUrlList: string[];
+}
+
 interface Props {
   handleClick: (event: string) => void;
 }
 
 interface TreeItemProps {
-  subgenre: {
-    title: string;
-    subGenreUrlList: string[];
-  };
+  subgenre: Categories;
   onClickTreeItem: (event: string) => void;
 }
