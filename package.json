@@ -12,7 +12,8 @@
   "jest": {
     "coveragePathIgnorePatterns": [
       "./src/*/index.tsx",
-      "./src/*.tsx"
+      "./src/*.tsx",
+      "./dist/components/*/__test/index.test.js"
     ],
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/ts-jest"
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.9.0",
+    "@material-ui/core": "^4.9.12",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.51",
     "@types/chai": "^4.2.11",
@@ -28,18 +30,18 @@
     "@types/mocha": "^7.0.2",
     "@types/react": "^16.9.29",
     "@types/react-dom": "^16.9.0",
+    "@types/react-test-renderer": "^16.9.2",
     "@types/styled-components": "^5.0.1",
     "babel-jest": "^25.5.1",
     "chai": "^4.2.0",
     "css-loader": "^3.2.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^25.5.4",
     "jest-cli": "^25.5.4",
     "mini-css-extract-plugin": "^0.8.0",
     "mocha": "^7.1.2",
+    "react-test-renderer": "^16.13.1",
     "source-map-loader": "^0.2.4",
     "styled-components": "^5.1.0",
     "ts-jest": "^25.4.0",
