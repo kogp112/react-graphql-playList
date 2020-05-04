@@ -20,6 +20,9 @@ module.exports = {
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json"]
     },
+    presets: [
+      '@babel/preset-typescript',
+    ],
     devServer: {
         port: '8081',
         hot: true,
