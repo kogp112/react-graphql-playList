@@ -1,7 +1,4 @@
 import * as React from "react";
-import { act } from "react-dom/test-utils";
-import { render } from "react-dom";
-import { expect } from "chai";
 import * as renderer from "react-test-renderer";
 import PlayList from "../index";
 
@@ -39,8 +36,9 @@ it("should render play list", () => {
       },
     ],
   };
-  act(() => {
-    render(<PlayList list={list} handleClickPlayList={onChange} />, container);
-  });
-});
 
+  const component = renderer
+  .create(<PlayList list={list} handleClickPlayList={onChange} />)
+  .toJSON();
+  expect(component).toMatchSnapshot();
+});

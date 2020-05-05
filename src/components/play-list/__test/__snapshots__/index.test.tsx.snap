@@ -1,0 +1,210 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render play list 1`] = `
+<div
+  className="MuiGrid-root"
+>
+  <div
+    className="MuiGrid-root MuiGrid-item"
+  >
+    <h5
+      className="MuiTypography-root MuiTypography-h5"
+    >
+      90sPunk
+    </h5>
+  </div>
+  <div
+    className="MuiGrid-root MuiGrid-item"
+  >
+    <div
+      className="MuiPaper-root MuiCard-root makeStyles-root-134 MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        className="MuiCardHeader-root"
+      >
+        <div
+          className="MuiCardHeader-content"
+        />
+        <div
+          className="MuiCardHeader-action"
+        >
+          <button
+            aria-label="play/pause"
+            className="MuiButtonBase-root MuiIconButton-root"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root makeStyles-playIcon-137"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M8 5v14l11-7z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        className="MuiCardContent-root makeStyles-content-135"
+      >
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle2"
+        >
+          Tilt - Fool To Blame
+        </h6>
+      </div>
+      <img
+        className="MuiCardMedia-root makeStyles-cover-136 MuiCardMedia-media MuiCardMedia-img"
+        src="https://img.youtube.com/vi/fWtFpYcgRFs/0.jpg"
+        title="Tilt - Fool To Blame"
+      />
+    </div>
+    <div
+      className="MuiPaper-root MuiCard-root makeStyles-root-198 MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        className="MuiCardHeader-root"
+      >
+        <div
+          className="MuiCardHeader-content"
+        />
+        <div
+          className="MuiCardHeader-action"
+        >
+          <button
+            aria-label="play/pause"
+            className="MuiButtonBase-root MuiIconButton-root"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root makeStyles-playIcon-201"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M8 5v14l11-7z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        className="MuiCardContent-root makeStyles-content-199"
+      >
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle2"
+        >
+          Tilt - Fool To Blame
+        </h6>
+      </div>
+      <img
+        className="MuiCardMedia-root makeStyles-cover-200 MuiCardMedia-media MuiCardMedia-img"
+        src="https://img.youtube.com/vi/fWtFpYcgRFs/0.jpg"
+        title="Tilt - Fool To Blame"
+      />
+    </div>
+    <div
+      className="MuiPaper-root MuiCard-root makeStyles-root-202 MuiPaper-elevation1 MuiPaper-rounded"
+    >
+      <div
+        className="MuiCardHeader-root"
+      >
+        <div
+          className="MuiCardHeader-content"
+        />
+        <div
+          className="MuiCardHeader-action"
+        >
+          <button
+            aria-label="play/pause"
+            className="MuiButtonBase-root MuiIconButton-root"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            <span
+              className="MuiIconButton-label"
+            >
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root makeStyles-playIcon-205"
+                focusable="false"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M8 5v14l11-7z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        className="MuiCardContent-root makeStyles-content-203"
+      >
+        <h6
+          className="MuiTypography-root MuiTypography-subtitle2"
+        >
+          Tilt - Fool To Blame
+        </h6>
+      </div>
+      <img
+        className="MuiCardMedia-root makeStyles-cover-204 MuiCardMedia-media MuiCardMedia-img"
+        src="https://img.youtube.com/vi/fWtFpYcgRFs/0.jpg"
+        title="Tilt - Fool To Blame"
+      />
+    </div>
+  </div>
+</div>
+`;
