@@ -30,7 +30,6 @@ it("convert url props correctlly", () => {
     <MovieArea url={url} />,
   );
   const tree = component.toTree();
-  console.log(tree?.rendered?.props.children.props.src);
   const expectedUrl = "https://www.youtube.com/embed/test";
   expect(tree?.rendered?.props.children.props.src).to.equal(expectedUrl);
 });
