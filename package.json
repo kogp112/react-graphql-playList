@@ -18,7 +18,7 @@
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/ts-jest"
     },
-    "rootDir": "/Users/kanami.ogawa/training/typescript-react-base"
+    "rootDir": "/Users/training/typescript-react-base"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.9.0",
